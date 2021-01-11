@@ -2,14 +2,16 @@
     "name": "notelocker-api",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "main.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "node ./src/main.js",
+        "test": "jest"
     },
     "author": "",
     "license": "UNLICENSED",
     "dependencies": {
         "dotenv": "^8.2.0",
+        "express": "^4.17.1",
         "jest": "^26.6.3",
         "knex": "^0.21.15",
         "pg": "^8.5.1",
