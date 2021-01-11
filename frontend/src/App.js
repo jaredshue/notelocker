@@ -1,7 +1,16 @@
+import {
+    BrowserRouter,
+    Switch,
+    Route,
+    Redirect
+} from "react-router-dom";
+
 function App() {
     return (
-        <div>
-        </div>
+        <BrowserRouter>
+            <Switch>
+            </Switch>
+        </BrowserRouter>
     );
 }
 
