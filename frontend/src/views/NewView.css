@@ -1,0 +1,7 @@
+.enter-password {
+    display:flex;
+}
+
+#sumbitted-password {
+    cursor:pointer;
+}
