@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const cors = require("cors")
 const express = require("express");
 const database = require("./database.js");
 
@@ -7,6 +7,7 @@ const app = express();
 const uuid =require("uuid");
 
 app.use(express.json());
+app.use(cors())
 
 const SERVER_LISTEN_PORT = 3001;
 
