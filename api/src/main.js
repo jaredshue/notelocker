@@ -1,9 +1,8 @@
 require("dotenv").config();
 
 const express = require("express");
+const database = require("./database.js");
 
-const config = require("../knexfile.js")[process.env.NODE_ENV];
-const database = require("knex")(config);
 const app = express();
 const uuid =require("uuid");
 
@@ -27,7 +26,7 @@ app.post("/notes", async (req, res) =>{
         var guid;
 
         for(var i = 0; i < 5; i++){
-            guid = uuid.v5()
+            guid = uuid.v1()
             var notes = await database.select("guid").from("notes").where("guid", guid)
             if(notes.length == 0)
                 break
