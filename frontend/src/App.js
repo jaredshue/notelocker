@@ -9,14 +9,15 @@ function App() {
     return (
         <BrowserRouter>
             <Switch>
-                <Route exact path="">
-                    <Redirect to="/new" />
+                <Route exact path="/">
+                   
                 </Route>
 
                 <Route exact path="/new">
                 </Route>
 
-                <Route exact path="/view">
+                <Route exact path="/NewView.js">
+                   <Redirect to="/view" />
                 </Route>
             </Switch>
         </BrowserRouter>
