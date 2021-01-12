@@ -2,8 +2,10 @@ import React from 'react';
 import {
     BrowserRouter,
     Switch,
-    Route
+    Route,
+    Redirect
 } from "react-router-dom";
+import Header from './components/Header';
 import NewView from './views/NewView'
 import NewNote from './views/NewNote'
 
@@ -22,8 +24,9 @@ function App() {
             <NewNote/>
           </Route>
 
-          <Route exact path="/view"></Route>
+          <Route exact path="/view">
             <NewView/>
+          </Route>
         </Route>
       </Switch>
     </BrowserRouter>
