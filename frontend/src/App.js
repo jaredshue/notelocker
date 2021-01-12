@@ -11,7 +11,7 @@ function App() {
         <BrowserRouter>
             <Switch>
                 <Route exact path="/">
-                   
+                    <Redirect to="/new" />
                 </Route>
 
                 <Route exact path="/new">

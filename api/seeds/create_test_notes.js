@@ -1,3 +1,4 @@
+
 exports.seed = function(knex) {
     return knex("notes").del()
         .then(function () {
