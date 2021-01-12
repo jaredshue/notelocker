@@ -1,9 +1,11 @@
+import React from 'react';
 import {
     BrowserRouter,
     Switch,
     Route,
     Redirect
 } from "react-router-dom";
+import NewView from './views/NewView'
 
 function App() {
     return (
@@ -16,8 +18,8 @@ function App() {
                 <Route exact path="/new">
                 </Route>
 
-                <Route exact path="/NewView.js">
-                   <Redirect to="/view" />
+                <Route exact path="/view">
+                    <NewView />
                 </Route>
             </Switch>
         </BrowserRouter>

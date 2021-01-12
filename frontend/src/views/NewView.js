@@ -1,11 +1,13 @@
-import React, { Componenet } from 'react';
-import App from './views/App.js'
+import React from 'react';
 
-class NewView extends Componenet {
+function NewView() {
     return (
         <div>
-            <h1>Hello </h1>
+            <h1>Password: </h1>
+            <input type="password" id="receiver-password" ></input>
+            <input type="submit"></input>
+        </div>
     );
 }
 
-export default NewView();
+export default NewView;
