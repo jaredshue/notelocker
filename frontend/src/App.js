@@ -5,24 +5,29 @@ import {
     Route
 } from "react-router-dom";
 import NewView from './views/NewView'
+import NewNote from './views/NewNote'
 
 function App() {
-    return (
-        <BrowserRouter>
-            <Switch>
-                <Route exact path="/">
-                    <Redirect to="/new" />
-                </Route>
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <Redirect to="/new" />
+        </Route>
 
-                <Route exact path="/new">
-                </Route>
+        <Route>
+          <Header />
 
-                <Route exact path="/view">
-                    <NewView />
-                </Route>
-            </Switch>
-        </BrowserRouter>
-    );
+          <Route exact path="/new">
+            <NewNote/>
+          </Route>
+
+          <Route exact path="/view"></Route>
+            <NewView/>
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
 export default App;
