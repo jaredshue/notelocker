@@ -2,8 +2,7 @@ import React from 'react';
 import {
     BrowserRouter,
     Switch,
-    Route,
-    Redirect
+    Route
 } from "react-router-dom";
 import NewView from './views/NewView'
 
