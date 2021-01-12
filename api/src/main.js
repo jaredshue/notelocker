@@ -22,6 +22,18 @@ app.post("/notes", async (req, res) =>{
         return
     }
 
+    if(req.body.note.length%2 != 0){
+        res.status(400).json({error: "Bad Request"})
+        return
+    }
+    var validChars = "0123456789abcdefABCDEF"
+    for(var i = 0; i < req.body.note.length; i++){
+        if(!validChars.includes(req.body.note[i])){
+            res.status(400).json({error: "Bad Request"})
+            return
+        }
+    }
+
     try{
         var guid;
 
