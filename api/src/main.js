@@ -1,4 +1,5 @@
 require("dotenv").config();
+
 const cors = require("cors");
 const uuid = require("uuid");
 const express = require("express");
@@ -14,7 +15,7 @@ app.use((req, res, next) => {
 
 const SERVER_LISTEN_PORT = 3001;
 
-app.post("/notes", async (req, res) =>{
+app.post("/notes", async (req, res) => {
     var keys = Object.keys(req.body);
     if (keys.length !== 1 || !keys.includes("note")) {
         res.status(400).json({ error: "Bad request" });
