@@ -16,7 +16,7 @@ function NewNote() {
     }
 
     const handleClick = async (event) => {
-        const newnote = document.getElementById("newnote").value;
+        const note = document.getElementById("note").value;
         const password = document.getElementById("password").value;
 
         var response = await fetch("http://localhost:3001/notes", {
@@ -27,23 +27,23 @@ function NewNote() {
                 "Access-Control-Allow-Origin": "*"
             },
             body: JSON.stringify({
-                note: createNote(newnote, password)
+                note: createNote(note, password)
             })
         });
 
         if (response.status === 200) {
             var data = await response.json();
-            setState({...state, guid: data.guid})
+            setState({ ...state, guid: data.guid });
         }
     }
 
     return (
         <div>
             {
-                state.guid === undefined
+                !state.guid
                 ? (
                     <>
-                        <textarea id="newnote" />
+                        <textarea id="note" />
                         <input type="password" id="password" />
                         <button onClick={ handleClick } />
                     </>
@@ -52,8 +52,8 @@ function NewNote() {
                     <>
                         <p>
                             Your note has been created! <br />
-                            <a href={`http://localhost:3000/view?noteID=${state.guid}`}>
-                                http://localhost:3000/view?noteID={state.guid}
+                            <a href={`http://localhost:3000/view?guid=${state.guid}`}>
+                                http://localhost:3000/view?guid={ state.guid }
                             </a>
                         </p>
                     </>
