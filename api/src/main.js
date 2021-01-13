@@ -70,25 +70,28 @@ app.post("/notes", async (req, res) => {
 
         res.status(200).json({ guid: guid });
     }
-    catch (e) {
-        console.log(e);
+    catch {
         res.status(500).json({ error: "Failed to add note to database" });
     }
-})
+});
 
-app.get('/notes/:guid', async (req, res) => {
-    try{
-        var notes = await database.from('notes').select('*').where('guid', req.params.guid);
+app.get("/notes/:guid", async (req, res) => {
+    try {
+        var notes = await database
+            .select("*")
+            .from("notes")
+            .where("guid", req.params.guid);
+
         if (notes.length === 0) {
             res.status(410).json({ error: "Note does not exist" });
             return;
         }
-        res.status(200).json(notes[0]);
-    }catch{
-        res.status(500).json({error:"failed to retrieve from the database"})
+
+        res.status(200).json({ guid: notes[0].guid, note: notes[0].note });
     }
-
-
+    catch {
+        res.status(500).json({ error: "Failed to retrieve note from the database" });
+    }
 })
 
 
@@ -96,32 +99,4 @@ app.listen(SERVER_LISTEN_PORT, () => {
     console.log(`Server listening at port ${SERVER_LISTEN_PORT}!`);
 });
 
-module.exports = app
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+module.exports = app;
