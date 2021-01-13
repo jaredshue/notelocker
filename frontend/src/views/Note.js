@@ -4,7 +4,7 @@ function Note() {
     const [noteData, setNoteData] = useState("");
 
     const getData = async () => {
-        const response = await fetch("http://localhost:3000/notes/ae1a824fe857f86a7e7e777c210e2c673abfba3ac8ae3fdd3bbcf51110f5c98c", {
+        const response = await fetch("http://localhost:3001/notes/bdc048c0-551d-11eb-8291-7733037ea32b", {
             method: "GET",
             mode: "cors",
             headers: {
@@ -14,7 +14,7 @@ function Note() {
         });
 
         const data = await response.json();
-        setNoteData(JSON.stringify(data));
+        setNoteData(JSON.stringify(data.note));
     }
 
     useEffect(() => { getData() }, []);
@@ -22,7 +22,6 @@ function Note() {
     return (
         <div>{noteData}</div>
     )
-
 }
 
 export default Note;

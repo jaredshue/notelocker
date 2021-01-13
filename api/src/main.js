@@ -24,7 +24,7 @@ app.post("/notes", async (req, res) => {
         return;
     }
 
-    if (typeof(req.body.note) !== "string"){
+    if (typeof (req.body.note) !== "string") {
         res.status(400).json({ error: "Bad request" });
         return;
     }
@@ -35,8 +35,8 @@ app.post("/notes", async (req, res) => {
     }
 
     var validCharacters = "0123456789abcdefABCDEF";
-    for(var i = 0; i < req.body.note.length; i++){
-        if(!validCharacters.includes(req.body.note[i])){
+    for (var i = 0; i < req.body.note.length; i++) {
+        if (!validCharacters.includes(req.body.note[i])) {
             res.status(400).json({ error: "Bad request" });
             return;
         }
@@ -45,7 +45,7 @@ app.post("/notes", async (req, res) => {
     try {
         var guid;
 
-        for (var i = 0; i < 5; i++){
+        for (var i = 0; i < 5; i++) {
             guid = uuid.v1();
 
             var notes = await database
@@ -57,7 +57,7 @@ app.post("/notes", async (req, res) => {
                 break;
             }
 
-            if (i == 4){
+            if (i == 4) {
                 res.status(500).json({ error: "An unknown problem occured" });
                 return;
             }
@@ -76,8 +76,52 @@ app.post("/notes", async (req, res) => {
     }
 })
 
+app.get('/notes/:guid', async (req, res) => {
+    try{
+        var notes = await database.from('notes').select('*').where('guid', req.params.guid);
+        if (notes.length === 0) {
+            res.status(410).json({ error: "Note does not exist" });
+            return;
+        }
+        res.status(200).json(notes[0]);
+    }catch{
+        res.status(500).json({error:"failed to retrieve from the database"})
+    }
+
+
+})
+
+
 app.listen(SERVER_LISTEN_PORT, () => {
     console.log(`Server listening at port ${SERVER_LISTEN_PORT}!`);
 });
 
 module.exports = app
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
