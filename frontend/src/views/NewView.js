@@ -24,10 +24,25 @@ function NewView() {
         }
     });
 
-    const readNote = (note, password) => {
-        var salt = crypto.createHash("sha256").update(password).digest();
-        var key = crypto.pbkdf2Sync(password, salt, 256000, 32, "sha256");
+    const createHash = (message, key) => {
+        var hmac = crypto.createHmac("sha256", key);
+        hmac.update(message);
+        return hmac.digest("hex");
+    }
 
+    const createKey = (password) => {
+        return crypto.pbkdf2Sync(
+            password,
+            crypto.createHash("sha256")
+                .update(password)
+                .digest(),
+            256000,
+            32,
+            "sha256"
+        );
+    }
+
+    const decryptNote = (note, key) => {
         var buffer = Buffer.from(note, "hex");
         var iv = buffer.slice(0, 16);
         var data = buffer.slice(16, buffer.length);
@@ -42,17 +57,33 @@ function NewView() {
         const password = document.getElementById("password").value;
 
         try {
-            var contents = readNote(state.note.note, password);
+            var key = createKey(password);
+            var note = decryptNote(state.note.note, key);
+            var hash = createHash(note, key);
 
-            setState({
-                ...state,
-                note: {
-                    ...state.note,
-                    note: contents
+            var response = await fetch(`http://localhost:3001/notes/${state.note.guid}`, {
+                method: "DELETE",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
                 },
-                decrypted: true,
-                errors: 0
+                body: JSON.stringify({
+                    guid: state.note.guid,
+                    hash: hash
+                })
             });
+
+            if (response.status === 200) {
+                setState({
+                    ...state,
+                    note: {
+                        ...state.note,
+                        note: note
+                    },
+                    decrypted: true,
+                    errors: 0
+                });
+            }
         }
         catch {
             setState({ ...state, errors: state.errors + 1 });
