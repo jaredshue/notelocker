@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 const crypto = require("crypto");
 
 function NewNote() {
-    const [state, setState] = React.useState({})
+    const [ state, setState ] = React.useState({});
 
     const createNote = (message, password) => {
         var salt = crypto.createHash("sha256").update(password).digest();
@@ -11,13 +11,13 @@ function NewNote() {
         var cipher = crypto.createCipheriv("aes-256-cbc", key, iv);
         var ct = cipher.update(message, "utf8", "hex");
         ct += cipher.final("hex");
-    
+
         return `${iv.toString("hex")}${ct}`;
     }
 
     const handleClick = async (event) => {
-        const newnote = document.getElementById("newnote").value
-        const password = document.getElementById("password").value
+        const newnote = document.getElementById("newnote").value;
+        const password = document.getElementById("password").value;
 
         var response = await fetch("http://localhost:3001/notes", {
             method: "POST",
@@ -29,8 +29,8 @@ function NewNote() {
             body: JSON.stringify({
                 note: createNote(newnote, password)
             })
-        })
-        console.log(response)//cors 500 error when posting
+        });
+        console.log(response); //cors 500 error when posting
         // if(response.status == 200){
         //     setState({...state, guid: response.body.note.guid})
         // }
@@ -38,9 +38,9 @@ function NewNote() {
 
     return (
         <div>
-            <textarea id="newnote"/>
-            <input type="password" id="password"/>
-            <button onClick={handleClick}/>
+            <textarea id="newnote" />
+            <input type="password" id="password" />
+            <button onClick={ handleClick } />
         </div>
     );
 }
