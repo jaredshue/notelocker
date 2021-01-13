@@ -9,7 +9,9 @@ const app = express();
 
 app.use(express.json());
 app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Headers", "*");
     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "*");
     next();
 });
 
@@ -68,7 +70,8 @@ app.post("/notes", async (req, res) => {
 
         res.status(200).json({ guid: guid });
     }
-    catch {
+    catch (e) {
+        console.log(e);
         res.status(500).json({ error: "Failed to add note to database" });
     }
 })
