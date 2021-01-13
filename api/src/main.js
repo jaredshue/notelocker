@@ -65,7 +65,7 @@ app.post("/notes", async (req, res) => {
 
         await database.into("notes").insert({
             guid: guid,
-            note: req.body
+            note: req.body.note
         });
 
         res.status(200).json({ guid: guid });
