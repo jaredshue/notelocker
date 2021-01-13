@@ -30,17 +30,36 @@ function NewNote() {
                 note: createNote(newnote, password)
             })
         });
-        console.log(response); //cors 500 error when posting
-        // if(response.status == 200){
-        //     setState({...state, guid: response.body.note.guid})
-        // }
+
+        if (response.status === 200) {
+            var data = await response.json();
+            setState({...state, guid: data.guid})
+        }
     }
 
     return (
         <div>
-            <textarea id="newnote" />
-            <input type="password" id="password" />
-            <button onClick={ handleClick } />
+            {
+                state.guid === undefined
+                ? (
+                    <>
+                        <textarea id="newnote" />
+                        <input type="password" id="password" />
+                        <button onClick={ handleClick } />
+                    </>
+                )
+                : (
+                    <>
+                        <p>
+                            Your note has been created! <br />
+                            <a href={`http://localhost:3000/view?noteID=${state.guid}`}>
+                                http://localhost:3000/view?noteID={state.guid}
+                            </a>
+                        </p>
+                    </>
+                )
+            }
+
         </div>
     );
 }
