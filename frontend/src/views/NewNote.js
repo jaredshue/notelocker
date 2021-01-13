@@ -4,9 +4,13 @@ const crypto = require("crypto");
 function NewNote() {
     const [ state, setState ] = React.useState({});
 
-    const createNote = (message, password) => {
-        var salt = crypto.createHash("sha256").update(password).digest();
-        var key = crypto.pbkdf2Sync(password, salt, 256000, 32, "sha256");
+    const createHash = (message, key) => {
+        var hmac = crypto.createHmac("sha256", key);
+        hmac.update(message);
+        return hmac.digest("hex");
+    }
+
+    const encryptNote = (message, key) => {
         var iv = crypto.randomBytes(16);
         var cipher = crypto.createCipheriv("aes-256-cbc", key, iv);
         var ct = cipher.update(message, "utf8", "hex");
@@ -15,19 +19,33 @@ function NewNote() {
         return `${iv.toString("hex")}${ct}`;
     }
 
+    const createKey = (password) => {
+        return crypto.pbkdf2Sync(
+            password,
+            crypto.createHash("sha256")
+                .update(password)
+                .digest(),
+            256000,
+            32,
+            "sha256"
+        );
+    }
+
     const handleClick = async (event) => {
         const note = document.getElementById("note").value;
         const password = document.getElementById("password").value;
+
+        var key = createKey(password);
 
         var response = await fetch("http://localhost:3001/notes", {
             method: "POST",
             headers: {
                 "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                note: createNote(note, password)
+                hash: createHash(note, key),
+                note: encryptNote(note, key)
             })
         });
 
