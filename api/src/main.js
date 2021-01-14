@@ -15,6 +15,22 @@ app.use((req, res, next) => {
     next();
 });
 
+async function prepareDatabase() {
+    try {
+        await database.from("notes").select("*");
+    }
+    catch {
+        try {
+            console.log("migrating database...");
+            database.migrate.latest();
+            console.log("database migrated!");
+        }
+        catch {
+            console.log("failed to migrate database!");
+        }
+    }
+}
+
 const SERVER_LISTEN_PORT = 3001;
 
 app.post("/notes", async (req, res) => {
@@ -170,8 +186,14 @@ app.delete("/notes/:guid", async (req, res) => {
     }
 });
 
-app.listen(SERVER_LISTEN_PORT, () => {
-    console.log(`Server listening at port ${SERVER_LISTEN_PORT}!`);
-});
+async function main() {
+    await prepareDatabase();
+
+    app.listen(SERVER_LISTEN_PORT, () => {
+        console.log(`Server listening at port ${SERVER_LISTEN_PORT}!`);
+    });
+}
+
+main();
 
 module.exports = app;
