@@ -36,6 +36,10 @@ input {
     font-size: 15px;
 }
 
+.text{
+    color: #E9EDDE;
+}
+
 button {
     color: #3D3B30;
     background-color: #E9EDDE;
