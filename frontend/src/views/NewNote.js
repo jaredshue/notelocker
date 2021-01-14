@@ -1,5 +1,6 @@
 import React from "react";
 const crypto = require("crypto");
+import "./NewNote.css"
 
 function NewNote() {
     const [ state, setState ] = React.useState({});
@@ -56,15 +57,15 @@ function NewNote() {
     }
 
     return (
-        <div>
+        <div className= "return-page">
             {
                 !state.guid
                 ? (
-                    <>
-                        <textarea id="note" />
-                        <input type="password" id="password" />
-                        <button onClick={ handleClick } />
-                    </>
+                    <div className = "user-input">
+                        <textarea id="note" placeholder="enter note"/>
+                        <input type="password" id="password" placeholder="enter password" />
+                        <button id="submit" onClick={ handleClick }> Submit </button>
+                    </div>
                 )
                 : (
                     <>
@@ -79,7 +80,7 @@ function NewNote() {
             }
 
         </div>
-    );
+    )
 }
 
 export default NewNote;
