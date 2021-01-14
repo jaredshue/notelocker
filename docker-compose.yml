@@ -2,10 +2,10 @@ version: "3"
 
 services:
 
-  # api:
-  #   build: api/
-  #   ports:
-  #     - '3001:3001'
+  api:
+    build: api/
+    ports:
+      - '3001:3001'
 
   frontend:
     build: frontend/
