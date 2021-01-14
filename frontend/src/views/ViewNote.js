@@ -95,12 +95,12 @@ function ViewNote() {
                 !state.decrypted && state.note !== null
                 ? (
                     <>
-                        <h2>Password: </h2>
+                        <h2 className='text'>Password: </h2>
                         <input type="text" id="password" placeholder="enter password" />
                         <button onClick={ attemptPassword }>Submit</button>
                         {
                             state.errors !== 0
-                            ? (<h1>Wrong password!</h1>)
+                            ? (<h1 className='text'>Wrong password!</h1>)
                             : (null)
                         }
                     </>
@@ -109,8 +109,8 @@ function ViewNote() {
                     <>
                         {
                             state.decrypted
-                            ? <p>{ state.note.note }</p>
-                            : <h1>That note does not exist!</h1>
+                            ? <p className='text'>{ state.note.note }</p>
+                            : <h1 className='text'>That note does not exist!</h1>
                         }
                     </>
                 )
