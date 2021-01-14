@@ -103,7 +103,7 @@ function ViewNote() {
                 ? (
                     <>
                         <h2 className='text'>Password: </h2>
-                        <input type="text" id="password" placeholder="enter password" />
+                        <input type="password" id="password" placeholder="enter password" />
                         <button onClick={ attemptPassword }>Submit</button>
                         {
                             state.errors !== 0
