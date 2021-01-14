@@ -6,21 +6,28 @@ function ViewNote() {
     var query = new URLSearchParams(window.location.search);
 
     const [ state, setState ] = React.useState({
-        note: null,
+        note: undefined,
         decrypted: false,
         errors: 0
     });
 
-    React.useEffect(async () => {
-        if (state.note !== null) return;
+    React.useEffect(() => {
+        var getData = async () => {
+            var response = await fetch(`http://localhost:3001/notes/${query.get("guid")}`);
 
-        var response = await fetch(`http://localhost:3001/notes/${query.get("guid")}`);
+            if (response.status === 200) {
+                var data = await response.json();
 
-        if (response.status === 200) {
-            var data = await response.json();
-
-            setState({ ...state, note: data });
+                setState({ ...state, note: data });
+            }
+            else {
+                setState({ ...state, note: null });
+            }
         }
+
+        if (state.note !== undefined) return;
+
+        getData();
     });
 
     const createHash = (message, key) => {
@@ -101,7 +108,7 @@ function ViewNote() {
                         {
                             state.errors !== 0
                             ? (<h1 className='text'>Wrong password!</h1>)
-                            : (null)
+                            : null
                         }
                     </>
                 )
@@ -109,7 +116,7 @@ function ViewNote() {
                     <>
                         {
                             state.decrypted
-                            ? <p className='text'>{ state.note.note }</p>
+                            ? <h1 className='text'>{ state.note.note }</h1>
                             : <h1 className='text'>That note does not exist!</h1>
                         }
                     </>
