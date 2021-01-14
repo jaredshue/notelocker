@@ -1,13 +1,13 @@
 FROM node:latest
 
-RUN mkdir -p /api
+RUN mkdir -p /src/app
 
-COPY ./ ./api
+WORKDIR /src/app
 
-WORKDIR /api
+COPY . /src/app
 
 RUN npm install
 
 EXPOSE 3001
 
-CMD ["npm", "start"]
+CMD [ "npm", "start" ]
