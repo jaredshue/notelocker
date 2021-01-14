@@ -6,8 +6,9 @@ import {
         Redirect
 } from "react-router-dom";
 
+import "./App.css";
 import Header from "./components/Header.js";
-import NewView from "./views/NewView.js";
+import ViewNote from "./views/ViewNote.js";
 import NewNote from "./views/NewNote.js";
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
                     </Route>
 
                     <Route exact path="/view">
-                        <NewView />
+                        <ViewNote />
                     </Route>
                 </Route>
             </Switch>

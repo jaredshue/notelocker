@@ -1,9 +1,8 @@
 import React from "react";
-import "./NewView.css";
 
 const crypto = require("crypto");
 
-function NewView() {
+function ViewNote() {
     var query = new URLSearchParams(window.location.search);
 
     const [ state, setState ] = React.useState({
@@ -120,4 +119,4 @@ function NewView() {
     );
 }
 
-export default NewView;
+export default ViewNote;
