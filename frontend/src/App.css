@@ -1,7 +1,52 @@
-.enter-password {
-    display:flex;
+* {
+    background-color: #3D3B30;
 }
 
-#sumbitted-password {
+.container {
+    display: flex;
+    flex-direction: column;
+    margin:0;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+header{
+    text-align: center;
+    color: #E7E247;
+    text-shadow: 2px 2px 4px #4D5061
+}
+
+textarea {
+    color: #3D3B30;
+    background-color: #E9EDDE;
+    margin:1%;
+    height: 300px;
+    width: 70%;
+    padding: 20px 20px;
+    font-size: 15px;
+}
+
+input {
+    color: #3D3B30;
+    background-color: #E9EDDE;
+    height: 15px;
+    width:30%;
+    padding: 10px 10px;
+    margin:1%;
+    font-size: 15px;
+}
+
+button {
+    color: #3D3B30;
+    background-color: #E9EDDE;
+    padding: 10px 20px;
+    font-size: 15px;
+    margin:1%;
     cursor:pointer;
+    border-radius: 5px;
+}
+
+button:hover{
+    color: #3D3B30;
+    background-color: #E7E247;
 }

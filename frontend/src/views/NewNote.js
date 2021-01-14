@@ -1,6 +1,5 @@
 import React from "react";
 const crypto = require("crypto");
-import "./NewNote.css"
 
 function NewNote() {
     const [ state, setState ] = React.useState({});
@@ -61,7 +60,7 @@ function NewNote() {
             {
                 !state.guid
                 ? (
-                    <div className = "user-input">
+                    <div className="container">
                         <textarea id="note" placeholder="enter note"/>
                         <input type="password" id="password" placeholder="enter password" />
                         <button id="submit" onClick={ handleClick }> Submit </button>
