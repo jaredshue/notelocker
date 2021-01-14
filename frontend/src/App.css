@@ -10,7 +10,7 @@
     flex-wrap: wrap;
 }
 
-header{
+header {
     text-align: center;
     color: #E7E247;
     text-shadow: 2px 2px 4px #4D5061
@@ -36,8 +36,9 @@ input {
     font-size: 15px;
 }
 
-.text{
+.text {
     color: #E9EDDE;
+    padding: 20px;
 }
 
 button {
@@ -50,7 +51,7 @@ button {
     border-radius: 5px;
 }
 
-button:hover{
+button:hover {
     color: #3D3B30;
     background-color: #E7E247;
 }
