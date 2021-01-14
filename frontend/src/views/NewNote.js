@@ -68,12 +68,12 @@ function NewNote() {
                 )
                 : (
                     <>
-                        <p className='text'>
+                        <h1 className='text'>
                             Your note has been created! <br />
                             <a href={`http://localhost:3000/view?guid=${state.guid}`}>
                                 http://localhost:3000/view?guid={ state.guid }
                             </a>
-                        </p>
+                        </h1>
                     </>
                 )
             }
