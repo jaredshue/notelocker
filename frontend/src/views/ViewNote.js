@@ -96,6 +96,15 @@ function ViewNote() {
         }
     }
 
+    const togglePassword = () => {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
     return (
         <>
             {
@@ -104,6 +113,7 @@ function ViewNote() {
                     <>
                         <h2 className='text'>Password: </h2>
                         <input type="password" id="password" placeholder="enter password" />
+                        <input type="checkbox" onClick={ togglePassword }/>Show Password
                         <button onClick={ attemptPassword }>Submit</button>
                         {
                             state.errors !== 0

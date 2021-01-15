@@ -54,6 +54,14 @@ function NewNote() {
             setState({ ...state, guid: data.guid });
         }
     }
+    const togglePassword = () => {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
 
     return (
         <div className= "return-page">
@@ -63,6 +71,7 @@ function NewNote() {
                     <div className="container">
                         <textarea id="note" placeholder="enter note"/>
                         <input type="password" id="password" placeholder="enter password" />
+                        <input type="checkbox" onClick={ togglePassword }/>Show Password
                         <button id="submit" onClick={ handleClick }> Submit </button>
                     </div>
                 )
