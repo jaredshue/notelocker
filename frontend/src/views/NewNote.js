@@ -71,7 +71,7 @@ function NewNote() {
                     <div className="container">
                         <textarea id="note" placeholder="enter note"/>
                         <input type="password" id="password" placeholder="enter password" />
-                        <input type="checkbox" onClick={ togglePassword }/>Show Password
+                        <p className='togglePassword'><input type="checkbox"onClick={ togglePassword }/>  Show Password</p>                  
                         <button id="submit" onClick={ handleClick }> Submit </button>
                     </div>
                 )
